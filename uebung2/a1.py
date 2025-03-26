@@ -14,14 +14,22 @@ class Vector3:
         return Vector3(self.x - toBeSubed.x, self.y - toBeSubed.y, self.z - toBeSubed.z)
     
     def __mul__(self, toBeMuled):
-        return Vector3(self.x * toBeMuled.x, self.y * toBeMuled.y, self.z * toBeMuled.z)
+        if type(toBeMuled) == Vector3:
+            return Vector3(self.x * toBeMuled.x, self.y * toBeMuled.y, self.z * toBeMuled.z)
+        if type(toBeMuled) == float or type(toBeMuled) == int:
+            return Vector3(self.x * toBeMuled.x, self.y * toBeMuled.y, self.z * toBeMuled.z)
+        raise TypeError('Parameter has to be either type float, int or Vector3')
 
 # Aufgabenstellung für Multiplikation mit Skalar definitv nicht verstanden.
 
     def dot(self, toBeDoted):
+        if not type(toBeDoted) == Vector3:
+            raise TypeError('Parameter has to be Vector3')
         return self.x * toBeDoted.x + self.y * toBeDoted.y + self.z * toBeDoted.z
     
     def cross(self, toBeCrossed):
+        if not type(toBeCrossed) == Vector3:
+            raise TypeError('Parameter has to be Vector3')
         return (
             self.y*toBeCrossed.z - self.z*toBeCrossed.y,
             self.z*toBeCrossed.x - self.x*toBeCrossed.z,
